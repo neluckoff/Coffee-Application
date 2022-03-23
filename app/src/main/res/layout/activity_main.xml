@@ -14,7 +14,7 @@
         android:layout_height="200dp"
         android:id="@+id/logo"
         android:layout_marginTop="20dp"
-        android:src="@drawable/logo_BONASERA" />
+        android:src="@drawable/logo" />
 
     <TextView
         android:id="@+id/sign_in"
@@ -86,6 +86,7 @@
         android:textSize="14sp" />
 
     <Button
+        android:id="@+id/sign_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/pass"
@@ -99,6 +100,56 @@
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/other_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_button"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Войти с помощью"
+        android:textAlignment="center"
+        android:textColor="@color/blackForText"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/google_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/other_login"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="230dp"
+        android:backgroundTint="@color/whiteButton"
+        android:elevation="6dp"
+        android:fontFamily="@font/roboto_medium"
+        android:stateListAnimator="@null"
+
+        android:text="Google"
+        android:textAlignment="textEnd"
+        android:textColor="@color/blackForText"
+        android:translationZ="4dp" />
+
+    <Button
+        android:id="@+id/vk_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/other_login"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/whiteButton"
+        android:elevation="6dp"
+        android:translationZ="4dp"
+
+        android:fontFamily="@font/roboto_medium"
+        android:stateListAnimator="@null"
+        android:text="Вконтакте"
+        android:textAlignment="textEnd"
+        android:textColor="@color/blackForText"/>
+
 
 
 
