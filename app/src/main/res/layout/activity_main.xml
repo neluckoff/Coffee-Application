@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".MainActivity"
+    tools:visibility="visible">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/logo"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo_BONASERA" />
+
+    <TextView
+        android:id="@+id/sign_in"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/redressed"
+        android:text="Войти"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="40dp"
+        android:textAlignment="textStart"
+        android:textColor="@color/blackForText"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/logo"/>
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/redressed"
+        android:text="Зарегистрироваться"
+        android:textAlignment="viewEnd"
+        android:layout_marginEnd="40dp"
+        android:textColor="@color/brown"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sign_in"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:fontFamily="@font/redressed"
+        android:hint="Логин"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:inputType="textPersonName"
+        android:backgroundTint="@color/brown"/>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:fontFamily="@font/redressed"
+        android:hint="Пароль"
+        android:textAlignment="textStart"
+        android:textColorHint="@color/brown"
+        android:inputType="textPersonName"
+        android:backgroundTint="@color/brown"/>
+
+    <TextView
+        android:id="@+id/forget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pass"
+        android:text="Забыли пароль?"
+        android:fontFamily="@font/redressed"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="40dp"
+        android:textColor="@color/blackForText"
+        android:textSize="14sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pass"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@color/brown"
+        android:elevation="4dp"
+        android:fontFamily="@font/redressed"
+        android:text="Войти"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+
+
+
+</RelativeLayout>
