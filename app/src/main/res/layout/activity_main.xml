@@ -76,9 +76,7 @@
         app:boxStrokeColor="@color/brown"
         android:textColorHint="@color/brown"
         app:prefixText="+7"
-        app:startIconDrawable="@drawable/ic_phone"
-
-        >
+        app:startIconDrawable="@drawable/ic_phone">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login"
@@ -91,7 +89,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_in"
             android:textColorHighlight="@color/brown"
-            android:textStyle="normal"/>
+            android:textStyle="normal"
+            android:maxLength="10"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -174,7 +173,8 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_button" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_button"
+        />
 
     <Button
         android:id="@+id/google_button"
