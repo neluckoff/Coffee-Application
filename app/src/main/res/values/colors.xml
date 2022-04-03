@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blackForText">#282828</color>
     <color name="whiteButton">#F0F0F0</color>
+    <color name="backgroundMenuElem">#E8E8E8</color>
 </resources>
