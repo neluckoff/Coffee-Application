@@ -21,9 +21,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Новости"
+        android:text="@string/news"
         android:textColor="@color/whiteButton"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"

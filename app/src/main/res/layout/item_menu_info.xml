@@ -31,7 +31,7 @@
                 android:layout_height="55dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="30dp"
-                android:text="Добавить в корзину"
+                android:text="@string/add_in_cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="55dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginBottom="28dp"
-                android:text="Добавить в избранное"
+                android:text="@string/add_in_liked"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Name Menu Element"
+                android:text="@string/name_menu_elem"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/blackForText"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="130dp"
-                android:text="Выбор сиропа"
+                android:text="@string/choose_syrop"
                 android:textColor="@color/blackForText"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:text="Назад"
+                android:text="@string/back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
-                    android:text="Описание"
+                    android:text="@string/description"
                     android:textColor="@color/blackForText"
                     android:textSize="15sp"
                     android:textStyle="normal" />
@@ -121,11 +121,13 @@
 
             <Spinner
                 android:id="@+id/spinner"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
                 android:layout_width="309dp"
                 android:layout_height="38dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
+                android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4"

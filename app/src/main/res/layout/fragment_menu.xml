@@ -31,22 +31,22 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сезонное" />
+            android:text="@string/season_menu" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Избранное" />
+            android:text="@string/liked_menu" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Стандарт" />
+            android:text="@string/standart_menu" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Выпечка" />
+            android:text="@string/baked_menu" />
 
     </com.google.android.material.tabs.TabLayout>
 
@@ -54,9 +54,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Меню"
+        android:text="@string/menu"
         android:textColor="@color/whiteButton"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
