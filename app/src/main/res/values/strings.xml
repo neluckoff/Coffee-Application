@@ -21,7 +21,7 @@
     <string name="addresses">Наши адреса</string>
     <string name="season_menu">Сезонное</string>
     <string name="liked_menu">Избранное</string>
-    <string name="standart_menu">Стандарт</string>
+    <string name="classic_menu">Стандарт</string>
     <string name="baked_menu">Выпечка</string>
     <string name="menu">Меню</string>
     <string name="news">Новости</string>
@@ -44,7 +44,7 @@
     <string name="add_in_cart">Добавить в корзину</string>
     <string name="add_in_liked">Добавить в избранное</string>
     <string name="name_menu_elem">Name Menu Element</string>
-    <string name="choose_syrop">Выберите сироп</string>
+    <string name="choose_syrup">Выберите сироп</string>
     <string name="back">Назад</string>
     <string name="description">Описание</string>
     <string name="name_news">Новости</string>
@@ -56,9 +56,19 @@
     <string name="firstname">Фамилия</string>
     <string name="date_birthday">Дата рождения</string>
     <string name="final_reg">Зарегистрироваться</string>
+    <string name="menu_elem_counter">1</string>
+    <string name="news_description">Описание новости</string>
+    <string name="news_header">Заголовок новости</string>
+    <string name="final_int_cost">5000p</string>
+    <string name="pay">Оплатить</string>
+    <string name="cart">Корзина</string>
+    <string name="syrop">Сироп:</string>
+    <string name="cost_with_dvoetochie">Стоимость:</string>
+    <string name="final_cart_cost">21313p</string>
+    <string name="witpout_syrop">Без сиропа</string>
 
 
-    <string-array name="sytops">
+    <string-array name="syrups_list">
         <item>Без сиропа</item>
         <item>Ванильный</item>
         <item>Карамельный</item>

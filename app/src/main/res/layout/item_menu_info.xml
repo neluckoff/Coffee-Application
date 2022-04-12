@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="130dp"
-                android:text="@string/choose_syrop"
+                android:text="@string/choose_syrup"
                 android:textColor="@color/blackForText"
                 android:textSize="17sp"
                 android:textStyle="bold"

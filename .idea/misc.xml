@@ -10,6 +10,7 @@
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/drawable/ic_plus.xml" value="0.1835" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/drawable/test_spinner.xml" value="0.1835" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/cart.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/coffe_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/forget_password.xml" value="0.33" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/fragment_map.xml" value="0.264" />
@@ -18,10 +19,12 @@
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/fragment_person.xml" value="0.264" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/google_map.xml" value="0.33" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/gps.xml" value="0.33" />
+        <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_cart.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_history.xml" value="0.4" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_menu.xml" value="0.536" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_menu_info.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_news.xml" value="0.21784420289855072" />
+        <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/item_news_more_info.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/loyalty_program.xml" value="0.264" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/main_cintainer.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/neluc/AndroidStudioProjects/CoffeApplication/app/src/main/res/layout/main_container.xml" value="0.36666666666666664" />
