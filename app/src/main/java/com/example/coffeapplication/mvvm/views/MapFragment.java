@@ -1,4 +1,4 @@
-package com.example.coffeapplication.fragments;
+package com.example.coffeapplication.mvvm.views;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

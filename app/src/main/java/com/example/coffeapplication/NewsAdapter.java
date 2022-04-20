@@ -1,4 +1,4 @@
-package com.example.coffeapplication.adapter;
+package com.example.coffeapplication;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,31 +11,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeapplication.R;
-import com.example.coffeapplication.model.News;
+import com.example.coffeapplication.mvvm.models.News;
+import com.example.coffeapplication.mvvm.views.NewsFragment;
 
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     List<News> news;
-    Context context;
+    private final int[] images = {R.drawable.ic_news_photo};
 
-    public NewsAdapter(Context context, List<News> news) {
+    public NewsAdapter(List<News> news) {
         this.news = news;
-        this.context = context;
     }
 
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View newsItem = LayoutInflater.from(context).inflate(R.layout.item_news, parent, false);
+        View newsItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
         return new NewsAdapter.NewsViewHolder(newsItem);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        int imageId = context.getResources().getIdentifier(news.get(position).getImage(), "drawable", context.getPackageName());
-        holder.imageNews.setImageResource(imageId);
+        holder.imageNews.setImageResource(images[position]);
 
         holder.textNews.setText(news.get(position).getText());
         holder.dateNews.setText(news.get(position).getDate());

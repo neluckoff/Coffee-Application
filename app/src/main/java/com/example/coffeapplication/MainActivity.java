@@ -1,20 +1,18 @@
 package com.example.coffeapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
-import com.example.coffeapplication.adapter.NewsAdapter;
-import com.example.coffeapplication.fragments.MapFragment;
-import com.example.coffeapplication.fragments.MenuFragment;
-import com.example.coffeapplication.fragments.NewsFragment;
-import com.example.coffeapplication.fragments.PersonFragment;
-import com.example.coffeapplication.model.News;
+import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
+import com.example.coffeapplication.mvvm.views.MapFragment;
+import com.example.coffeapplication.mvvm.views.MenuFragment;
+import com.example.coffeapplication.mvvm.views.NewsFragment;
+import com.example.coffeapplication.mvvm.views.PersonFragment;
+import com.example.coffeapplication.mvvm.models.News;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -25,7 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     SupportMapFragment mapFragment;
     RecyclerView newsRecycler;
-    NewsAdapter newsAdapter;
+    NewsViewModel newsAdapter;
 
     BottomNavigationView bottomNavigationView;
 
@@ -97,15 +95,15 @@ public class MainActivity extends AppCompatActivity {
         }
     };*/
 
-    private void setNewsRecycler(List<News> newsList) {
+    /*private void setNewsRecycler(List<News> newsList) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
 
         newsRecycler = findViewById(R.id.newsRecycler);
         newsRecycler.setLayoutManager(layoutManager);
 
-        newsAdapter = new NewsAdapter(this, newsList);
+        newsAdapter = new NewsViewModel(this, newsList);
         newsRecycler.setAdapter(newsAdapter);
-    }
+    }*/
 
     /*@Override
     public void onMapReady(@NonNull GoogleMap googleMap) {

@@ -1,4 +1,4 @@
-package com.example.coffeapplication.model;
+package com.example.coffeapplication.mvvm.models;
 
 public class News {
     int id;
@@ -44,4 +44,5 @@ public class News {
     public void setDate(String date) {
         this.date = date;
     }
+
 }
