@@ -5,7 +5,7 @@
     android:id="@+id/nav_auth"
 
 
-    app:startDestination="@id/signUpFragment">
+    app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.coffeapplication.mvvm.views.SignUpFragment"
@@ -19,9 +19,17 @@
         android:id="@+id/signInFragment"
         android:name="com.example.coffeapplication.mvvm.views.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/activity_main" >
+        tools:layout="@layout/activity_login" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.example.coffeapplication.mvvm.views.NewsFragment"
+        android:label="news"
+        tools:layout="@layout/fragment_news"/>
 </navigation>

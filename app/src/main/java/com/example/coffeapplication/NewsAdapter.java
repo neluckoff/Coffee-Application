@@ -19,10 +19,11 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
     List<News> news;
-    private final int[] images = {R.drawable.ic_news_photo};
+    Context context;
 
-    public NewsAdapter(List<News> news) {
+    public NewsAdapter(List<News> news, Context context) {
         this.news = news;
+        this.context = context;
     }
 
     @NonNull
@@ -34,7 +35,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.imageNews.setImageResource(images[position]);
+
 
         holder.textNews.setText(news.get(position).getText());
         holder.dateNews.setText(news.get(position).getDate());

@@ -66,6 +66,7 @@
     <string name="cost_with_dvoetochie">Стоимость:</string>
     <string name="final_cart_cost">21313p</string>
     <string name="witpout_syrop">Без сиропа</string>
+    <string name="Email">Почта</string>
 
 
     <string-array name="syrups_list">

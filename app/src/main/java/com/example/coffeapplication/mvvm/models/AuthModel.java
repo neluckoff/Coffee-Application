@@ -1,4 +1,4 @@
-package com.example.coffeapplication.mvvm.repositories;
+package com.example.coffeapplication.mvvm.models;
 
 import android.app.Application;
 import android.widget.Toast;
@@ -12,7 +12,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthRepository {
+public class AuthModel {
     private Application application;
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
     private MutableLiveData<Boolean> userLoggedMutableLiveData;
@@ -26,7 +26,7 @@ public class AuthRepository {
         return userLoggedMutableLiveData;
     }
 
-    public AuthRepository(Application application){
+    public AuthModel(Application application){
         this.application = application;
         firebaseUserMutableLiveData = new MutableLiveData<>();
         userLoggedMutableLiveData = new MutableLiveData<>();

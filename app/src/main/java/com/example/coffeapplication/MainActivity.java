@@ -1,22 +1,13 @@
 package com.example.coffeapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
 import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
-import com.example.coffeapplication.mvvm.views.MapFragment;
-import com.example.coffeapplication.mvvm.views.MenuFragment;
-import com.example.coffeapplication.mvvm.views.NewsFragment;
-import com.example.coffeapplication.mvvm.views.PersonFragment;
-import com.example.coffeapplication.mvvm.models.News;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.List;
 
 
 //extends FragmentActivity implements OnMapReadyCallback

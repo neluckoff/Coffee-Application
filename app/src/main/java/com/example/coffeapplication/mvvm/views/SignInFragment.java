@@ -18,46 +18,50 @@ import androidx.navigation.Navigation;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignInFragment extends Fragment {
 
-    private EditText emailEdit, passEdit;
+    private EditText phoneEdit, passEdit;
     private TextView signUpText;
     private Button signInBtn;
     private AuthViewModel viewModel;
     private NavController navController;
+
+    GoogleSignInOptions gso;
+
+    Button googleBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
-        viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
+        /*viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null){
                     navController.navigate(R.id.action_signInFragment_to_signUpFragment);
                 }
             }
-        });
+        });*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_main, container, false);
+        return inflater.inflate(R.layout.activity_login, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        emailEdit = view.findViewById(R.id.login);
-        passEdit = view.findViewById(R.id.pass);
-        signUpText = view.findViewById(R.id.sign_up);
-        signInBtn = view.findViewById(R.id.sign_button);
+        phoneEdit = view.findViewById(R.id.loginIn);
+        passEdit = view.findViewById(R.id.passIn);
+        signUpText = view.findViewById(R.id.sign_upIn);
+        signInBtn = view.findViewById(R.id.sign_buttonIn);
 
         navController = Navigation.findNavController(view);
 
@@ -71,11 +75,13 @@ public class SignInFragment extends Fragment {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = emailEdit.getText().toString();
+                String phone = phoneEdit.getText().toString();
                 String pass = passEdit.getText().toString();
 
-                if (!email.isEmpty() && !pass.isEmpty()){
-                    viewModel.signIn(email , pass);
+                if (!phone.isEmpty() && !pass.isEmpty()){
+                    viewModel.signIn(phone, pass);
+                    // TODO: проверка на вход
+                    navController.navigate(R.id.action_signInFragment_to_newsFragment);
                 }
             }
         });

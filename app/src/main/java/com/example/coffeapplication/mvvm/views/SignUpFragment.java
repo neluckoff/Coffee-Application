@@ -24,7 +24,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignUpFragment extends Fragment {
 
     private EditText phoneEdit, passEdit;
-    private TextView signInText;
     private Button signUpBtn;
     private AuthViewModel viewModel;
     private NavController navController;
@@ -34,20 +33,19 @@ public class SignUpFragment extends Fragment {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
-        viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
+        /*viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null){
                     navController.navigate(R.id.action_signUpFragment_to_signInFragment);
                 }
             }
-        });
+        });*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.activity_registration, container, false);
     }
 
@@ -55,10 +53,10 @@ public class SignUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        phoneEdit = view.findViewById(R.id.login);
-        passEdit = view.findViewById(R.id.pass);
-        signInText = view.findViewById(R.id.sign_in);
-        signUpBtn = view.findViewById(R.id.sign_button);
+        phoneEdit = view.findViewById(R.id.loginUp);
+        passEdit = view.findViewById(R.id.passUp);
+        TextView signInText = view.findViewById(R.id.sign_inUp2);
+        signUpBtn = view.findViewById(R.id.sign_buttonUp);
 
         navController = Navigation.findNavController(view);
 
@@ -72,11 +70,12 @@ public class SignUpFragment extends Fragment {
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = phoneEdit.getText().toString();
+                String phone = phoneEdit.getText().toString();
                 String pass = passEdit.getText().toString();
 
-                if (!email.isEmpty() && !pass.isEmpty()){
-                    viewModel.register(email , pass);
+                if (!phone.isEmpty() && !pass.isEmpty()){
+                    viewModel.register(phone , pass);
+                    navController.navigate(R.id.action_signUpFragment_to_signInFragment);
                 }
             }
         });

@@ -1,20 +1,25 @@
 package com.example.coffeapplication.mvvm.viewModels;
 
 import android.app.Application;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.coffeapplication.mvvm.repositories.AuthRepository;
+import com.example.coffeapplication.mvvm.models.AuthModel;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class AuthViewModel extends AndroidViewModel {
 
-    private AuthRepository repository;
+    private AuthModel authModel;
     private MutableLiveData<FirebaseUser> userData;
     private MutableLiveData<Boolean> loggedStatus;
+    GoogleSignInClient gsc;
 
     public MutableLiveData<FirebaseUser> getUserData() {
         return userData;
@@ -26,19 +31,20 @@ public class AuthViewModel extends AndroidViewModel {
 
     public AuthViewModel(@NonNull Application application) {
         super(application);
-        repository = new AuthRepository(application);
-        userData = repository.getFirebaseUserMutableLiveData();
-        loggedStatus = repository.getUserLoggedMutableLiveData();
+        authModel = new AuthModel(application);
+        userData = authModel.getFirebaseUserMutableLiveData();
+        loggedStatus = authModel.getUserLoggedMutableLiveData();
     }
 
     public void register(String email , String pass){
-        repository.register(email, pass);
+        authModel.register(email, pass);
     }
     public void signIn(String email , String pass){
-        repository.login(email, pass);
+        authModel.login(email, pass);
     }
     public void signOut(){
-        repository.signOut();
+        authModel.signOut();
     }
+
 
 }
