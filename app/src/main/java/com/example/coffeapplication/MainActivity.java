@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_news);
+        setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        /*bottomNavigationView = findViewById(R.id.bottomNavigationView);
         //bottomNavigationView.setOnNavigationItemSelectedListener(navListner);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new NewsFragment()).commit();
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, selectedFragment).commit();
                 return true;
-            });
+            });*/
 
 
         /*List<News> newsList = new ArrayList<>();
