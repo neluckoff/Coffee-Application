@@ -26,10 +26,22 @@
         <action
             android:id="@+id/action_signInFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_forgetPasswordFragment"
+            app:destination="@id/forgetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.coffeapplication.mvvm.views.NewsFragment"
         android:label="news"
         tools:layout="@layout/fragment_news"/>
+    <fragment
+        android:id="@+id/forgetPasswordFragment"
+        android:name="com.example.coffeapplication.mvvm.views.ForgetPasswordFragment"
+        android:label="forget_pass"
+        tools:layout="@layout/forget_password" >
+        <action
+            android:id="@+id/action_forgetPasswordFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>

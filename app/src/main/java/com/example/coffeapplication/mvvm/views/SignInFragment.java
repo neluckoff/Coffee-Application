@@ -24,13 +24,10 @@ import com.google.firebase.auth.FirebaseUser;
 public class SignInFragment extends Fragment {
 
     private EditText phoneEdit, passEdit;
-    private TextView signUpText;
+    private TextView signUpText, forgetPass;
     private Button signInBtn;
     private AuthViewModel viewModel;
     private NavController navController;
-
-//    GoogleSignInOptions gso;
-//    Button googleBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +50,7 @@ public class SignInFragment extends Fragment {
         passEdit = view.findViewById(R.id.passIn);
         signUpText = view.findViewById(R.id.sign_upIn);
         signInBtn = view.findViewById(R.id.sign_buttonIn);
+        forgetPass = view.findViewById(R.id.forget);
 
         navController = Navigation.findNavController(view);
 
@@ -60,6 +58,13 @@ public class SignInFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_signInFragment_to_signUpFragment);
+            }
+        });
+
+        forgetPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_signInFragment_to_forgetPasswordFragment);
             }
         });
 

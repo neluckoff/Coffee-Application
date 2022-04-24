@@ -17,6 +17,7 @@ import com.example.coffeapplication.R;
 
 import com.example.coffeapplication.mvvm.models.News;
 import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class NewsFragment extends Fragment {
     RecyclerView recyclerView;
     NewsViewModel newsViewModel;
     RecyclerView rcv;
+    BottomNavigationView bottomNavigationView;
 
 
     public static NewsFragment newInstance() {
@@ -50,10 +52,11 @@ public class NewsFragment extends Fragment {
             }
         };
         rcv = view.findViewById(R.id.newsRecycler);
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+
         newsViewModel.getCurrentName().observe(getViewLifecycleOwner(), nameObserver);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),1);
         rcv.setLayoutManager(gridLayoutManager);
+
         return view;
     }
 
