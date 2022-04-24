@@ -60,46 +60,4 @@ public class MainActivity extends AppCompatActivity {
         /*mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);*/
     }
-
-    /*private BottomNavigationView.OnNavigationItemSelectedListener navListner = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
-
-            switch (item.getItemId()) {
-                case R.id.nav_menu:
-                    selectedFragment = new MenuFragment();
-                    return true;
-                case R.id.nav_news:
-                    selectedFragment = new NewsFragment();
-                    return true;
-                case R.id.nav_map:
-                    selectedFragment = new MapFragment();
-                    return true;
-                case R.id.nav_person:
-                    selectedFragment = new PersonFragment();
-                    return true;
-            }
-            assert false;
-            getSupportFragmentManager().beginTransaction().replace(R.id.main_container, selectedFragment).commit();
-            return false;
-        }
-    };*/
-
-    /*private void setNewsRecycler(List<News> newsList) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-
-        newsRecycler = findViewById(R.id.newsRecycler);
-        newsRecycler.setLayoutManager(layoutManager);
-
-        newsAdapter = new NewsViewModel(this, newsList);
-        newsRecycler.setAdapter(newsAdapter);
-    }*/
-
-    /*@Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
-        LatLng CoofeOne = new LatLng(55.75772607568077, 37.62742044545359);
-        googleMap.addMarker(new MarkerOptions().position(CoofeOne).title("Наша точка"));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CoofeOne, 10f));
-    }*/
 }

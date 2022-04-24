@@ -33,14 +33,6 @@ public class SignUpFragment extends Fragment {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
-        /*viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
-            @Override
-            public void onChanged(FirebaseUser firebaseUser) {
-                if (firebaseUser != null){
-                    navController.navigate(R.id.action_signUpFragment_to_signInFragment);
-                }
-            }
-        });*/
     }
 
     @Override

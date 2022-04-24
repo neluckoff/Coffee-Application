@@ -1,4 +1,4 @@
-package com.example.coffeapplication.mvvm.models;
+package com.example.coffeapplication.mvvm.repositories;
 
 import android.app.Application;
 import android.widget.Toast;
@@ -12,7 +12,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AuthModel {
+public class AuthRepository {
     private Application application;
     private MutableLiveData<FirebaseUser> firebaseUserMutableLiveData;
     private MutableLiveData<Boolean> userLoggedMutableLiveData;
@@ -26,7 +26,7 @@ public class AuthModel {
         return userLoggedMutableLiveData;
     }
 
-    public AuthModel(Application application){
+    public AuthRepository(Application application){
         this.application = application;
         firebaseUserMutableLiveData = new MutableLiveData<>();
         userLoggedMutableLiveData = new MutableLiveData<>();
@@ -43,7 +43,7 @@ public class AuthModel {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
-                }else{
+                }  {
                     Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -56,7 +56,7 @@ public class AuthModel {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
-                }else{
+                } else {
                     Toast.makeText(application, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }

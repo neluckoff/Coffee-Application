@@ -1,31 +1,21 @@
 package com.example.coffeapplication.mvvm.models;
 
 public class News {
-    int id;
-    String image;
+    int image;
     String text;
     String date;
 
-    public News(int id, String image, String text, String date) {
-        this.id = id;
+    public News(int image, String text, String date) {
         this.image = image;
         this.text = text;
         this.date = date;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         this.image = image;
     }
 

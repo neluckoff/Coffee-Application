@@ -81,7 +81,7 @@
         android:fontFamily="@font/redressed"
         app:startIconDrawable="@drawable/ic_email">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:inputType="textEmailAddress"
             android:id="@+id/loginIn"
             android:layout_width="match_parent"
@@ -93,10 +93,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sign_inUp"
             android:textColorHighlight="@color/brown"
-            android:textStyle="normal"
-            />
-
-
+            android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -120,10 +117,9 @@
         app:counterOverflowTextColor="@color/brown"
         android:textColorHint="@color/brown"
         app:startIconDrawable="@drawable/ic_lock"
-        android:fontFamily="@font/redressed"
-        >
+        android:fontFamily="@font/redressed">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:inputType="textPassword"
             android:id="@+id/passIn"
             android:layout_width="match_parent"

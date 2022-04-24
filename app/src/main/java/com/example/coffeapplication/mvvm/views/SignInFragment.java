@@ -29,23 +29,14 @@ public class SignInFragment extends Fragment {
     private AuthViewModel viewModel;
     private NavController navController;
 
-    GoogleSignInOptions gso;
-
-    Button googleBtn;
+//    GoogleSignInOptions gso;
+//    Button googleBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
-        /*viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
-            @Override
-            public void onChanged(FirebaseUser firebaseUser) {
-                if (firebaseUser != null){
-                    navController.navigate(R.id.action_signInFragment_to_signUpFragment);
-                }
-            }
-        });*/
     }
 
     @Override

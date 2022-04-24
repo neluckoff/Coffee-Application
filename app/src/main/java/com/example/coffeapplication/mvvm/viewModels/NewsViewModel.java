@@ -7,23 +7,19 @@ import androidx.lifecycle.ViewModel;
 import com.example.coffeapplication.mvvm.models.News;
 import com.example.coffeapplication.mvvm.repositories.NewsRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsViewModel extends ViewModel {
-    private MutableLiveData<List<News>> newsList;
+    private MutableLiveData<ArrayList<News>> currentName;
 
-    private NewsRepository news;
+    public MutableLiveData<ArrayList<News>> getCurrentName() {
 
-    public void init(){
-        if (newsList != null ){
-            return ;
+        if (currentName == null) {
+            currentName = new MutableLiveData<ArrayList<News>>();
         }
-        news = NewsRepository.getInstance();
-        newsList = news.getNewsList();
-    }
-
-    public LiveData<List<News>> getNewsList(){
-        return newsList;
+        currentName.setValue(new NewsRepository().getHolder());
+        return currentName;
     }
 }
 

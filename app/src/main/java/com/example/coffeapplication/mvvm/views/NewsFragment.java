@@ -1,67 +1,60 @@
 package com.example.coffeapplication.mvvm.views;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.coffeapplication.NewsAdapter;
+import com.example.coffeapplication.mvvm.adapters.NewsAdapter;
 import com.example.coffeapplication.R;
 
 import com.example.coffeapplication.mvvm.models.News;
 import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class NewsFragment extends Fragment {
-    private RecyclerView recyclerView;
-    private NewsAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private NewsViewModel newsViewModel;
+    NewsAdapter adapter;
+    RecyclerView recyclerView;
+    NewsViewModel newsViewModel;
+    RecyclerView rcv;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public static NewsFragment newInstance() {
+        return new NewsFragment();
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
 
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
-        TextView text = view.findViewById(R.id.textNews);
-        TextView date = view.findViewById(R.id.dateNews);
-        ImageView image = view.findViewById(R.id.imageNews);
-        RecyclerView recyclerView = view.findViewById(R.id.newsRecycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-
-        recyclerView = recyclerView.findViewById(R.id.newsRecycler);
-
-        newsViewModel.init();
-
-        newsViewModel.getNewsList().observe(getViewLifecycleOwner(), new Observer<List<News>>() {
+        final Observer<ArrayList<News>> nameObserver = new Observer<ArrayList<News>>() {
             @Override
-            public void onChanged(List<News> news) {
-                adapter.notifyDataSetChanged();
+            public void onChanged(@Nullable final ArrayList<News> plants) {
+                adapter = new NewsAdapter(plants,requireContext());
+                rcv.setAdapter(adapter);
             }
-        });
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+        };
+        rcv = view.findViewById(R.id.newsRecycler);
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        newsViewModel.getCurrentName().observe(getViewLifecycleOwner(), nameObserver);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),1);
+        rcv.setLayoutManager(gridLayoutManager);
+        return view;
     }
 
 
