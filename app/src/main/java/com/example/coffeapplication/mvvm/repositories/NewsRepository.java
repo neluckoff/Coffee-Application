@@ -4,6 +4,7 @@ import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.models.News;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class NewsRepository {
     ArrayList<News> holder;
@@ -25,6 +26,7 @@ public class NewsRepository {
     }
 
     public ArrayList<News> getHolder() {
+        Collections.reverse(holder);
         return holder;
     }
 }

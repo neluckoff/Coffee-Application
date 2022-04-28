@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        //bottomNavigationView.setOnNavigationItemSelectedListener(navListner);
+       /* bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new NewsFragment()).commit();
 

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.coffeapplication.R;
+import com.example.coffeapplication.mvvm.repositories.MapRepository;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,26 +21,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapFragment extends Fragment {
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View view =  inflater.inflate(R.layout.fragment_map, container, false);
+/*        MapRepository map = new MapRepository();
+        map.onMapReady();*/
+        return view;
     }
 
-    public static class Map extends FragmentActivity implements OnMapReadyCallback {
 
-        SupportMapFragment mapFragment;
-
-        public Map() {
-            mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
-        }
-
-        @Override
-        public void onMapReady(@NonNull GoogleMap googleMap) {
-            LatLng CoofeOne = new LatLng(55.75772607568077, 37.62742044545359);
-            googleMap.addMarker(new MarkerOptions().position(CoofeOne).title("Наша точка"));
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CoofeOne, 10f));
-        }
-    }
 }
