@@ -49,7 +49,9 @@
     <string name="description">Описание</string>
     <string name="name_news">Новости</string>
     <string name="date_news">date</string>
-    <string name="information_of_loyalty">Информация о лояльности. Па па па, ла ла ла</string>
+    <string name="information_of_loyalty">Программа лояльности — система поощрения
+        постоянных покупателей: за приверженность компании
+        клиенты получают скидки и бонусы. </string>
     <string name="close">Закрыть</string>
     <string name="registration">Регистрация</string>
     <string name="name">Имя</string>
