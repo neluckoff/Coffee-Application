@@ -1,30 +1,25 @@
-package com.example.coffeapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+package com.example.coffeapplication.mvvm.views;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
-import com.example.coffeapplication.mvvm.views.MapFragment;
-import com.example.coffeapplication.mvvm.views.MenuFragment;
-import com.example.coffeapplication.mvvm.views.NewsFragment;
-import com.example.coffeapplication.mvvm.views.PersonFragment;
-import com.google.android.gms.maps.SupportMapFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.coffeapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-public class MainActivity extends AppCompatActivity {
+public class AppActivity extends AppCompatActivity {
+    BottomNavigationView bottomNavigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-    }
-
-    /*setContentView(R.layout.fragment_news);
+        setContentView(R.layout.fragment_news);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new NewsFragment()).commit();
@@ -47,5 +42,6 @@ public class MainActivity extends AppCompatActivity {
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, selectedFragment).commit();
             return true;
-        });*/
+        });
+    }
 }

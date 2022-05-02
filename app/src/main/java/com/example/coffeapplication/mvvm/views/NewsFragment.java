@@ -1,14 +1,21 @@
 package com.example.coffeapplication.mvvm.views;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +30,6 @@ import java.util.ArrayList;
 
 public class NewsFragment extends Fragment {
     NewsAdapter adapter;
-    RecyclerView recyclerView;
     NewsViewModel newsViewModel;
     RecyclerView rcv;
     BottomNavigationView bottomNavigationView;
@@ -46,8 +52,8 @@ public class NewsFragment extends Fragment {
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
         final Observer<ArrayList<News>> nameObserver = new Observer<ArrayList<News>>() {
             @Override
-            public void onChanged(@Nullable final ArrayList<News> plants) {
-                adapter = new NewsAdapter(plants,requireContext());
+            public void onChanged(@Nullable final ArrayList<News> news) {
+                adapter = new NewsAdapter(news,requireContext());
                 rcv.setAdapter(adapter);
             }
         };
@@ -59,6 +65,4 @@ public class NewsFragment extends Fragment {
 
         return view;
     }
-
-
 }

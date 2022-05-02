@@ -1,5 +1,6 @@
 package com.example.coffeapplication.mvvm.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.firebase.auth.FirebaseUser;
 
 public class SignInFragment extends Fragment {
 
@@ -77,7 +75,7 @@ public class SignInFragment extends Fragment {
                 if (!phone.isEmpty() && !pass.isEmpty()){
                     viewModel.signIn(phone, pass);
                     // TODO: проверка на вход
-                    navController.navigate(R.id.action_signInFragment_to_newsFragment);
+                    startActivity(new Intent(getActivity(),AppActivity.class));
                 }
             }
         });
