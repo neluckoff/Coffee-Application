@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,13 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.coffeapplication.R;
+import com.example.coffeapplication.mvvm.repositories.AuthRepository;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignInFragment extends Fragment {
 
@@ -26,12 +33,20 @@ public class SignInFragment extends Fragment {
     private Button signInBtn;
     private AuthViewModel viewModel;
     private NavController navController;
+    private FirebaseAuth auth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
                 .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
+        auth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = auth.getCurrentUser();
+        if (user != null) {
+            startActivity(new Intent(getActivity(), AppActivity.class));
+        }
     }
 
     @Override
@@ -69,13 +84,28 @@ public class SignInFragment extends Fragment {
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phone = phoneEdit.getText().toString();
+                String mail = phoneEdit.getText().toString();
                 String pass = passEdit.getText().toString();
 
-                if (!phone.isEmpty() && !pass.isEmpty()){
-                    viewModel.signIn(phone, pass);
-                    // TODO: проверка на вход
-                    startActivity(new Intent(getActivity(),AppActivity.class));
+                if (!mail.isEmpty() && !pass.isEmpty()) {
+                    login(mail, pass);
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Пропущено поле", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    public void login(String email , String pass){
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    //firebaseUserMutableLiveData.postValue(auth.getCurrentUser());
+                    startActivity(new Intent(getActivity(), AppActivity.class));
+                    Toast.makeText(getActivity().getApplication(), "Успешный вход", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity().getApplication(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });

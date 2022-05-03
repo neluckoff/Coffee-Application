@@ -210,7 +210,7 @@
         app:layout_constraintTop_toBottomOf="@+id/firstnameLayout">
 
         <RadioButton
-            android:id="@+id/radioButton1"
+            android:id="@+id/manBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
@@ -219,7 +219,7 @@
             android:shadowColor="@color/brown"/>
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/girlBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/ic_girl"

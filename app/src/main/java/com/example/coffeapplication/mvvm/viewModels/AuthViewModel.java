@@ -15,7 +15,6 @@ public class AuthViewModel extends AndroidViewModel {
     private AuthRepository repository;
     private MutableLiveData<FirebaseUser> userData;
     private MutableLiveData<Boolean> loggedStatus;
-    GoogleSignInClient gsc;
 
     public MutableLiveData<FirebaseUser> getUserData() {
         return userData;
@@ -32,15 +31,11 @@ public class AuthViewModel extends AndroidViewModel {
         loggedStatus = repository.getUserLoggedMutableLiveData();
     }
 
-    public void register(String email , String pass){
-        repository.register(email, pass);
+    public void register(String email , String pass, String name, String sec_name, String birthday, String gender){
+        repository.register(email, pass, name, sec_name, birthday, gender);
     }
-    public void signIn(String email , String pass){
-        repository.login(email, pass);
-    }
+
     public void signOut(){
         repository.signOut();
     }
-
-
 }

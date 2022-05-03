@@ -1,6 +1,7 @@
 package com.example.coffeapplication.mvvm.views;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -15,8 +16,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.coffeapplication.MainActivity;
 import com.example.coffeapplication.R;
+import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -24,18 +29,16 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class PersonFragment extends Fragment {
-    Button loyaltyProgram;
-    Button exit;
-    Button editProfile;
-    Button historyOrders;
-    Dialog loyaltyDialog;
+    Button loyaltyProgram, exit, editProfile, historyOrders;
+    Dialog loyaltyDialog, ordersDialog;
     ImageView qrcode;
-    Dialog ordersDialog;
+    AuthViewModel viewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel = new ViewModelProvider(this , ViewModelProvider.AndroidViewModelFactory
+                .getInstance(getActivity().getApplication())).get(AuthViewModel.class);
     }
 
     @Nullable
@@ -50,7 +53,6 @@ public class PersonFragment extends Fragment {
             BarcodeEncoder encoder = new BarcodeEncoder();
             Bitmap bitmap = encoder.createBitmap(matrix);
             qrcode.setImageBitmap(bitmap);
-
         } catch (WriterException e) {
             e.printStackTrace();
         }
@@ -72,13 +74,12 @@ public class PersonFragment extends Fragment {
                 loyaltyDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 loyaltyDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-//                Button closeLoyalty = view.findViewById(R.id.materialCloseButton);
-//                closeLoyalty.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        loyaltyDialog.dismiss();
-//                    }
-//                });
+                (loyaltyDialog.findViewById(R.id.materialCloseButton)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        loyaltyDialog.dismiss();
+                    }
+                });
 
                 loyaltyDialog.show();
             }
@@ -94,15 +95,24 @@ public class PersonFragment extends Fragment {
                 ordersDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 ordersDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
-//                Button closeOrders = view.findViewById(R.id.closeHistoryBtn);
-//                closeOrders.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        ordersDialog.dismiss();
-//                    }
-//                });
+                (ordersDialog.findViewById(R.id.closeHistoryBtn)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ordersDialog.dismiss();
+                    }
+                });
 
                 ordersDialog.show();
+            }
+        });
+
+        exit = view.findViewById(R.id.exitButton);
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.signOut();
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
     }
