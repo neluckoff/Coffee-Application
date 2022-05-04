@@ -16,7 +16,7 @@ public class PersonRepository {
     public PersonRepository() {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        myRef = mFirebaseDatabase.getReference("Users");
         user = mAuth.getCurrentUser();
     }
 

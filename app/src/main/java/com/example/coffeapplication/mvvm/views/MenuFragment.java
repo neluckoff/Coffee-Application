@@ -28,6 +28,7 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
 
         tabLayout.setupWithViewPager(viewPager);
 

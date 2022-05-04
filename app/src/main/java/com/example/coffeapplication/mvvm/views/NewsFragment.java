@@ -32,12 +32,6 @@ public class NewsFragment extends Fragment {
     NewsAdapter adapter;
     NewsViewModel newsViewModel;
     RecyclerView rcv;
-    BottomNavigationView bottomNavigationView;
-
-
-    public static NewsFragment newInstance() {
-        return new NewsFragment();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

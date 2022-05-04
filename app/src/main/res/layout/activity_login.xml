@@ -87,7 +87,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/sign_inUp"
-            android:fontFamily="@font/redressed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +124,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/loginUp"
-            android:fontFamily="@font/redressed"
             tools:layout_editor_absoluteX="40dp"
             android:textColorHint="@color/brown"
             android:textColorHighlight="@color/brown"/>

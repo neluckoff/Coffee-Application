@@ -1,17 +1,18 @@
 package com.example.coffeapplication.mvvm.models;
 
 public class MenuItem {
-    private String name, cost, syrop, clas;
-    private boolean favorite;
+    private String name, cost, syrop, id;
+    private boolean favorite, season;
     private int image;
 
-    public MenuItem(String name, String cost, String clas, boolean favorite, int image) {
+    public MenuItem(String name, String cost, String id, int image, boolean season) {
         this.name = name;
         this.cost = cost;
         this.syrop = "";
-        this.clas = clas;
-        this.favorite = favorite;
+        this.id = id;
+        this.favorite = false;
         this.image = image;
+        this.season = season;
     }
 
     public String getName() {
@@ -38,12 +39,12 @@ public class MenuItem {
         this.syrop = syrop;
     }
 
-    public String getClas() {
-        return clas;
+    public String getId() {
+        return id;
     }
 
-    public void setClas(String clas) {
-        this.clas = clas;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public boolean isFavorite() {
@@ -60,5 +61,13 @@ public class MenuItem {
 
     public void setImage(int image) {
         this.image = image;
+    }
+
+    public boolean isSeason() {
+        return season;
+    }
+
+    public void setSeason(boolean season) {
+        this.season = season;
     }
 }
