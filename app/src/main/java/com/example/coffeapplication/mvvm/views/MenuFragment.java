@@ -11,16 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.TabAdapter;
+import com.example.coffeapplication.mvvm.viewModels.MenuViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 public class MenuFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private MenuViewModel menuViewModel;
 
     @Nullable
     @Override
@@ -31,12 +34,8 @@ public class MenuFragment extends Fragment {
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
 
         tabLayout.setupWithViewPager(viewPager);
-
-        TabAdapter tabAdapter = new TabAdapter(getActivity().getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        tabAdapter.addFragment(new MenuSeasonFragment(), "Сезонное");
-        tabAdapter.addFragment(new MenuStandartFragment(), "Стандартное");
-        tabAdapter.addFragment(new MenuBakeFragment(), "Выпечка");
-        tabAdapter.addFragment(new MenuFavoriteFragment(), "Избранное");
+        menuViewModel = new ViewModelProvider(this).get(MenuViewModel.class);
+        TabAdapter tabAdapter = menuViewModel.getTabAdapter(getActivity().getSupportFragmentManager());
 
         viewPager.setAdapter(tabAdapter);
 

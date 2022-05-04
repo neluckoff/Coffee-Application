@@ -15,6 +15,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AppActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    MenuFragment menuFragment = new MenuFragment();
+    NewsFragment newsFragment = new NewsFragment();
+    MapFragment mapFragment = new MapFragment();
+    PersonFragment personFragment = new PersonFragment();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,16 +32,16 @@ public class AppActivity extends AppCompatActivity {
             Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.nav_menu:
-                    selectedFragment = new MenuFragment();
+                    selectedFragment = menuFragment;
                     break;
                 case R.id.nav_news:
-                    selectedFragment = new NewsFragment();
+                    selectedFragment = newsFragment;
                     break;
                 case R.id.nav_map:
-                    selectedFragment = new MapFragment();
+                    selectedFragment = mapFragment;
                     break;
                 case R.id.nav_person:
-                    selectedFragment = new PersonFragment();
+                    selectedFragment = personFragment;
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, selectedFragment).commit();
