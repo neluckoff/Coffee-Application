@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.coffeapplication.MainActivity;
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
+import com.example.coffeapplication.mvvm.viewModels.PersonViewModel;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -33,6 +35,8 @@ public class PersonFragment extends Fragment {
     Dialog loyaltyDialog, ordersDialog;
     ImageView qrcode;
     AuthViewModel viewModel;
+    PersonViewModel personViewModel;
+    TextView name, mail;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,17 +49,15 @@ public class PersonFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
-        String data = "Name Firstname Sale";
+        personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
+
+        name = view.findViewById(R.id.pName);
+        mail = view.findViewById(R.id.tNumber);
+        personViewModel.getNameAndMailFromBD(name, mail);
+
+        String data = "hallo";
         qrcode = view.findViewById(R.id.QRcode);
-        MultiFormatWriter writer = new MultiFormatWriter();
-        try {
-            BitMatrix matrix = writer.encode(data, BarcodeFormat.QR_CODE, 1000, 1000);
-            BarcodeEncoder encoder = new BarcodeEncoder();
-            Bitmap bitmap = encoder.createBitmap(matrix);
-            qrcode.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
+        personViewModel.generatingQRCode(data, qrcode);
 
         return view;
     }
