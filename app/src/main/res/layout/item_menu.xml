@@ -24,30 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/name_product"
-                android:textColor="@color/blackForText"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/cost_name_product"
-                android:textColor="@color/blackForText"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textView14"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
-
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="141dp"
@@ -58,7 +34,42 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@drawable/mug_coffee" />
 
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/name_product"
+                android:textColor="@color/blackForText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/standartItemMenu"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/cost_name_product"
+                android:textColor="@color/blackForText"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/addToCart"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/addToCart" />
+
             <ImageButton
+                android:id="@+id/addToCart"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="5dp"
@@ -72,53 +83,33 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/addedItemMenu"
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/nameElem_added"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/name_product"
-                android:textColor="@color/blackForText"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/imageElem_added"
-                app:layout_constraintTop_toBottomOf="@+id/imageElem_added" />
-
-            <ImageView
-                android:id="@+id/imageElem_added"
-                android:layout_width="141dp"
-                android:layout_height="83dp"
-                android:layout_marginTop="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/imageButtonPlus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="5dp"
                 android:backgroundTint="@color/brown"
                 android:src="@drawable/ic_plus"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nameElem_added" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/imageButtonMinus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginEnd="30dp"
                 android:backgroundTint="@color/brown"
                 android:src="@drawable/ic_minus"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+                app:layout_constraintBottom_toBottomOf="@+id/imageButtonPlus"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageButton" />
+                app:layout_constraintStart_toEndOf="@+id/imageButtonPlus"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonPlus" />
 
             <TextView
                 android:id="@+id/menu_elem_counter"
@@ -128,10 +119,10 @@
                 android:textColor="@color/brown"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
-                app:layout_constraintTop_toTopOf="@+id/imageButton" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButtonMinus"
+                app:layout_constraintStart_toEndOf="@+id/imageButtonPlus"
+                app:layout_constraintTop_toTopOf="@+id/imageButtonPlus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

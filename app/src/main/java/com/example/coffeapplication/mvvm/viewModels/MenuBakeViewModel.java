@@ -18,4 +18,5 @@ public class MenuBakeViewModel extends ViewModel {
         currentName.setValue(new MenuRepository().getBakeHolder());
         return currentName;
     }
+
 }

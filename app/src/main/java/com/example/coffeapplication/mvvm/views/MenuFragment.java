@@ -1,9 +1,13 @@
 package com.example.coffeapplication.mvvm.views;
 
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +28,8 @@ public class MenuFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private MenuViewModel menuViewModel;
+    private ImageView cartImage;
+    private Dialog cartDialog;
 
     @Nullable
     @Override
@@ -39,7 +45,32 @@ public class MenuFragment extends Fragment {
 
         viewPager.setAdapter(tabAdapter);
 
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        cartDialog = new Dialog(getContext());
+
+        cartImage = view.findViewById(R.id.imageView3);
+
+        cartImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cartDialog.setContentView(R.layout.cart);
+                cartDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cartDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                (cartDialog.findViewById(R.id.cartClose)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cartDialog.dismiss();
+                    }
+                });
+
+                cartDialog.show();
+            }
+        });
     }
 }
