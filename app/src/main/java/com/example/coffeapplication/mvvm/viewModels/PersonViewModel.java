@@ -41,6 +41,7 @@ public class PersonViewModel extends ViewModel {
                     }
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -58,5 +59,26 @@ public class PersonViewModel extends ViewModel {
         } catch (WriterException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setEditInfo(TextView name, TextView mail, TextView lastname) {
+        personRepository.getMyRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    if (user.mail.equals(Objects.requireNonNull(personRepository.getmAuth().getCurrentUser()).getEmail())) {
+                        name.setText(user.name);
+                        mail.setText(user.getMail());
+                        lastname.setText(user.secName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

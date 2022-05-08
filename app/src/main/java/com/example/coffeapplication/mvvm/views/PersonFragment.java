@@ -113,9 +113,9 @@ public class PersonFragment extends Fragment {
 
         editProfile = view.findViewById(R.id.editProfile);
         editDialog = new Dialog(getContext());
-        EditText nameEdit = view.findViewById(R.id.editTextTextPersonName);
-        EditText firstnameEdit = view.findViewById(R.id.editTextFirstName);
-        EditText mailEdit = view.findViewById(R.id.editTextMail);
+//        TextView name = view.findViewById(R.id.editName);
+//        TextView lastname = view.findViewById(R.id.editLastname);
+//        TextView mail = view.findViewById(R.id.editMail);
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +123,16 @@ public class PersonFragment extends Fragment {
                 editDialog.setContentView(R.layout.edit_profile);
                 editDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 editDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                personViewModel.setEditInfo((editDialog.findViewById(R.id.editName)),
+                        (editDialog.findViewById(R.id.editMail)), (editDialog.findViewById(R.id.editLastname)));
+
+                (editDialog.findViewById(R.id.closeEdit)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        editDialog.dismiss();
+                    }
+                });
 
                 editDialog.show();
             }
