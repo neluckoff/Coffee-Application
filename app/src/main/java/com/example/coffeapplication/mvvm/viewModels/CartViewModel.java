@@ -33,11 +33,4 @@ public class CartViewModel extends ViewModel {
         System.out.println(cartRepository.getSum());
         return currentName;
     }
-
-    public int getSum() {
-        CartRepository cartRepository = new CartRepository();
-        System.out.println(cartRepository.getSum() + "p");
-        return cartRepository.getSum();
-    }
-
 }

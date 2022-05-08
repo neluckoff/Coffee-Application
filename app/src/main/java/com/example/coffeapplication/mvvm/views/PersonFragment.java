@@ -97,18 +97,7 @@ public class PersonFragment extends Fragment {
         historyOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ordersDialog.setContentView(R.layout.orders_history);
-                ordersDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                ordersDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-                (ordersDialog.findViewById(R.id.closeHistoryBtn)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ordersDialog.dismiss();
-                    }
-                });
-
-                ordersDialog.show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new OrderFragment()).commit();
             }
         });
 

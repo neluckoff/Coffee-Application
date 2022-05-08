@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/materialButton2"
+                android:id="@+id/payBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
@@ -69,7 +69,7 @@
                 android:textColor="@color/blackForText"
                 android:textSize="20sp"
                 android:textStyle="normal"
-                app:layout_constraintBottom_toTopOf="@+id/materialButton2"
+                app:layout_constraintBottom_toTopOf="@+id/payBtn"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
