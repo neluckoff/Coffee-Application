@@ -42,6 +42,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.id.setText(data.get(position).getId());
         holder.cost.setText(data.get(position).getCost());
         holder.final_cost.setText(data.get(position).getFinal_cost());
+        holder.count.setText(data.get(position).getCount());
 
     }
 
@@ -51,7 +52,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     }
 
     class OrderViewHolder extends RecyclerView.ViewHolder {
-        TextView name, cost, final_cost, id;
+        TextView name, cost, final_cost, id, count;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +60,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             name = itemView.findViewById(R.id.textView12);
             cost = itemView.findViewById(R.id.textView11);
             final_cost = itemView.findViewById(R.id.finalcost);
+            count = itemView.findViewById(R.id.countHistor);
         }
     }
 

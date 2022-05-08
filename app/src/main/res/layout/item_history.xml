@@ -87,6 +87,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <TextView
+                android:id="@+id/countHistor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="1\n2\n3"
+                android:textColor="@color/blackForText"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+            <TextView
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

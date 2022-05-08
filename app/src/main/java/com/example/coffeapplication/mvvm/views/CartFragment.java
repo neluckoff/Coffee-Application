@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class CartFragment extends Fragment {
     CartAdapter adapter;
@@ -79,24 +80,24 @@ public class CartFragment extends Fragment {
             public void onClick(View view) {
                 FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = mFirebaseDatabase.getReference("Cart");
-                String id;
 
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String id, name="", cost="";
+                        String id="", name="", cost="", count="";
                         int sum = 0;
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             Cart cart = ds.getValue(Cart.class);
-                            name += cart.getName() + "\n";
+                            name += (cart.getName() + "\n");
                             cost += (cart.getCost() + "\n");
+                            count += (cart.getCount() + "\n");
                             String a = (cart.getCost()
                                     .substring(0, cart.getCost().length()-1));
                             sum += (Integer.parseInt(a) * Integer.parseInt(cart.getCount()));
+                            id = ds.getKey().replace('-', '0').toUpperCase(Locale.ROOT).substring(0, 10);
                         }
-                        id = snapshot.getKey();
                         if (!name.isEmpty() && !cost.isEmpty()) {
-                            Orders order = new Orders(id, sum+"p", name, cost);
+                            Orders order = new Orders(id, sum+"p", name, cost, count);
                             Toast.makeText(getActivity().getApplication(), "Заказ оформлен", Toast.LENGTH_SHORT).show();
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new MenuFragment()).commit();
                             DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Orders");

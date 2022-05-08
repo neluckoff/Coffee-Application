@@ -1,15 +1,16 @@
 package com.example.coffeapplication.mvvm.models;
 
 public class Orders {
-    private String id;
+    private String id, count;
     private String final_cost;
     private String names, cost;
 
-    public Orders(String id, String final_cost, String names, String cost) {
+    public Orders(String id, String final_cost, String names, String cost, String count) {
         this.id = id;
         this.final_cost = final_cost;
         this.names = names;
         this.cost = cost;
+        this.count = count;
     }
 
     public Orders() {
@@ -45,5 +46,13 @@ public class Orders {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 }
