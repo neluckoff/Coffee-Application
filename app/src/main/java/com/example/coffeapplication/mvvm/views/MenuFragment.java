@@ -1,8 +1,6 @@
 package com.example.coffeapplication.mvvm.views;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +10,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.TabAdapter;
 import com.example.coffeapplication.mvvm.viewModels.MenuViewModel;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 public class MenuFragment extends Fragment {
@@ -30,6 +24,13 @@ public class MenuFragment extends Fragment {
     private MenuViewModel menuViewModel;
     private ImageView cartImage;
     private Dialog cartDialog;
+    private CartFragment cartFragment;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        cartFragment = new CartFragment();
+    }
 
     @Nullable
     @Override
@@ -58,18 +59,7 @@ public class MenuFragment extends Fragment {
         cartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cartDialog.setContentView(R.layout.cart);
-                cartDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                cartDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-                (cartDialog.findViewById(R.id.cartClose)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        cartDialog.dismiss();
-                    }
-                });
-
-                cartDialog.show();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, cartFragment).commit();
             }
         });
     }

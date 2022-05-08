@@ -34,7 +34,6 @@ public class SignInFragment extends Fragment {
     private AuthViewModel viewModel;
     private NavController navController;
     private FirebaseAuth auth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

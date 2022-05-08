@@ -61,7 +61,7 @@
     <string name="menu_elem_counter">1</string>
     <string name="news_description">Описание новости</string>
     <string name="news_header">Заголовок новости</string>
-    <string name="final_int_cost">5000p</string>
+    <string name="final_int_cost">0p</string>
     <string name="pay">Оплатить</string>
     <string name="cart">Корзина</string>
     <string name="syrop">Сироп:</string>

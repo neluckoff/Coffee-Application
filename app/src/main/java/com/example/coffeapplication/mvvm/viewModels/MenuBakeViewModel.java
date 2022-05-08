@@ -1,10 +1,12 @@
 package com.example.coffeapplication.mvvm.viewModels;
 
+import android.view.View;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.coffeapplication.mvvm.models.MenuItem;
-import com.example.coffeapplication.mvvm.repositories.MenuRepository;
+import com.example.coffeapplication.mvvm.repositories.MenusRepository;
 
 import java.util.ArrayList;
 
@@ -15,7 +17,7 @@ public class MenuBakeViewModel extends ViewModel {
         if (currentName == null) {
             currentName = new MutableLiveData<ArrayList<MenuItem>>();
         }
-        currentName.setValue(new MenuRepository().getBakeHolder());
+        currentName.setValue(new MenusRepository().getBakeHolder());
         return currentName;
     }
 

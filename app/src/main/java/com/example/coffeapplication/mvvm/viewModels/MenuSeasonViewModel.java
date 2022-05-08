@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.coffeapplication.mvvm.models.MenuItem;
-import com.example.coffeapplication.mvvm.repositories.MenuRepository;
+import com.example.coffeapplication.mvvm.repositories.MenusRepository;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class MenuSeasonViewModel extends ViewModel {
         if (currentName == null) {
             currentName = new MutableLiveData<ArrayList<MenuItem>>();
         }
-        currentName.setValue(new MenuRepository().getSeasonHolder());
+        currentName.setValue(new MenusRepository().getSeasonHolder());
         return currentName;
     }
 }

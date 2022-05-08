@@ -36,9 +36,9 @@
         android:layout_height="wrap_content"
         android:text="@string/addresses"
         android:textColor="@color/whiteButton"
-        android:textStyle="bold"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/map"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="@+id/toolbar"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />

@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.CartAdapter;
@@ -28,6 +30,7 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     CartViewModel cartViewModel;
     RecyclerView rcv;
+    Button exit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +47,7 @@ public class CartFragment extends Fragment {
         };
         rcv = view.findViewById(R.id.cartRec);
 
-        cartViewModel.getCurrentName().observe(getViewLifecycleOwner(), nameObserver);
+        cartViewModel.getCurrentName(view).observe(getViewLifecycleOwner(), nameObserver);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),1);
         rcv.setLayoutManager(gridLayoutManager);
 
@@ -54,5 +57,12 @@ public class CartFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        exit = view.findViewById(R.id.cartClose);
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new MenuFragment()).commit();
+            }
+        });
     }
 }

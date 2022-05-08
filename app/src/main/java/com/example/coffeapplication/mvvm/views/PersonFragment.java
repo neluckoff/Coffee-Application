@@ -6,11 +6,14 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,12 +34,13 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class PersonFragment extends Fragment {
-    Button loyaltyProgram, exit, editProfile, historyOrders;
-    Dialog loyaltyDialog, ordersDialog;
+    Button loyaltyProgram, exit, historyOrders;
+    Dialog loyaltyDialog, ordersDialog, editDialog;
     ImageView qrcode;
     AuthViewModel viewModel;
     PersonViewModel personViewModel;
     TextView name, mail;
+    ImageButton editProfile;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +59,7 @@ public class PersonFragment extends Fragment {
         mail = view.findViewById(R.id.tNumber);
         personViewModel.getNameAndMailFromBD(name, mail);
 
-        String data = "hallo";
+        String data = name.toString() + " " + mail.toString();
         qrcode = view.findViewById(R.id.QRcode);
         personViewModel.generatingQRCode(data, qrcode);
 
@@ -115,6 +119,23 @@ public class PersonFragment extends Fragment {
             public void onClick(View view) {
                 viewModel.signOut();
                 startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+
+        editProfile = view.findViewById(R.id.editProfile);
+        editDialog = new Dialog(getContext());
+        EditText nameEdit = view.findViewById(R.id.editTextTextPersonName);
+        EditText firstnameEdit = view.findViewById(R.id.editTextFirstName);
+        EditText mailEdit = view.findViewById(R.id.editTextMail);
+
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editDialog.setContentView(R.layout.edit_profile);
+                editDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                editDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                editDialog.show();
             }
         });
     }

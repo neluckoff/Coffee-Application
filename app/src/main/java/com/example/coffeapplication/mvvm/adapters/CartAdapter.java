@@ -17,7 +17,6 @@ import com.example.coffeapplication.mvvm.models.News;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-
     ArrayList<Cart> data;
     Context context;
 
@@ -30,7 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.item_news, parent, false);
+        View view=inflater.inflate(R.layout.item_cart, parent, false);
         return new CartViewHolder(view);
     }
 
@@ -38,10 +37,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull final CartViewHolder holder, int position) {
         final Cart temp = data.get(position);
 
-        holder.text.setText(data.get(position).getName());
+        holder.name.setText(data.get(position).getName());
+        holder.count.setText(data.get(position).getCount());
         holder.cost.setText(data.get(position).getCost());
         holder.syrop.setText(data.get(position).getSyrop());
-        holder.count.setText(data.get(position).getCount());
 
     }
 
@@ -51,13 +50,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView text, cost, syrop, count;
+        TextView name, count, cost, syrop;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            text=(TextView)itemView.findViewById(R.id.textView19);
-            cost=(TextView) itemView.findViewById(R.id.costCartItem);
-            syrop=(TextView)itemView.findViewById(R.id.syropCartItem);
-            count=(TextView) itemView.findViewById(R.id.textView20);
+            name = itemView.findViewById(R.id.textView19);
+            cost = itemView.findViewById(R.id.costCartItem);
+            syrop = itemView.findViewById(R.id.syropCartItem);
+            count = itemView.findViewById(R.id.textView20);
         }
     }
 }
