@@ -12,6 +12,7 @@ import com.example.coffeapplication.mvvm.models.Cart;
 import com.example.coffeapplication.mvvm.models.News;
 import com.example.coffeapplication.mvvm.repositories.CartRepository;
 import com.example.coffeapplication.mvvm.repositories.NewsRepository;
+import com.example.coffeapplication.mvvm.views.CartFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

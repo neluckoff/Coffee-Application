@@ -15,7 +15,7 @@ import com.example.coffeapplication.mvvm.models.News;
 
 import java.util.ArrayList;
 
-public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
     ArrayList<News> data;
     Context context;
 
@@ -46,16 +46,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     public int getItemCount() {
         return data.size();
     }
-}
 
-
-class NewsViewHolder extends RecyclerView.ViewHolder {
-    ImageView img;
-    TextView text, date;
-    public NewsViewHolder(@NonNull View itemView) {
-        super(itemView);
-        img=(ImageView)itemView.findViewById(R.id.imageNewsItem);
-        text=(TextView)itemView.findViewById(R.id.textNewsItem);
-        date=(TextView)itemView.findViewById(R.id.dateNewsItem);
+    class NewsViewHolder extends RecyclerView.ViewHolder {
+        ImageView img;
+        TextView text, date;
+        public NewsViewHolder(@NonNull View itemView) {
+            super(itemView);
+            img=(ImageView)itemView.findViewById(R.id.imageNewsItem);
+            text=(TextView)itemView.findViewById(R.id.textNewsItem);
+            date=(TextView)itemView.findViewById(R.id.dateNewsItem);
+        }
     }
+
 }
+

@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cartItem"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -35,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/cartMinus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="20dp"
@@ -54,19 +56,20 @@
                 android:textColor="@color/brown"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-                app:layout_constraintTop_toTopOf="@+id/imageButton3" />
+                app:layout_constraintBottom_toBottomOf="@+id/cartMinus"
+                app:layout_constraintEnd_toStartOf="@+id/cartMinus"
+                app:layout_constraintTop_toTopOf="@+id/cartMinus" />
 
             <ImageButton
+                android:id="@+id/cartPlus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/brown"
                 android:src="@drawable/ic_plus"
-                app:layout_constraintBottom_toBottomOf="@+id/imageButton3"
+                app:layout_constraintBottom_toBottomOf="@+id/cartMinus"
                 app:layout_constraintEnd_toStartOf="@+id/textView20"
-                app:layout_constraintTop_toTopOf="@+id/imageButton3" />
+                app:layout_constraintTop_toTopOf="@+id/cartMinus" />
 
             <TextView
                 android:id="@+id/textView21"

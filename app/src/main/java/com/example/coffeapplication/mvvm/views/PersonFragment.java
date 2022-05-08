@@ -59,7 +59,7 @@ public class PersonFragment extends Fragment {
         mail = view.findViewById(R.id.tNumber);
         personViewModel.getNameAndMailFromBD(name, mail);
 
-        String data = name.toString() + " " + mail.toString();
+        String data = "Mama krasotul\'ka";
         qrcode = view.findViewById(R.id.QRcode);
         personViewModel.generatingQRCode(data, qrcode);
 
