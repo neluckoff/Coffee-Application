@@ -2,6 +2,7 @@ package com.example.coffeapplication.mvvm.viewModels;
 
 import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -61,7 +62,7 @@ public class PersonViewModel extends ViewModel {
         }
     }
 
-    public void setEditInfo(TextView name, TextView mail, TextView lastname) {
+    public void setEditInfo(EditText name, EditText mail, EditText lastname) {
         personRepository.getMyRef().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -71,6 +72,25 @@ public class PersonViewModel extends ViewModel {
                         name.setText(user.name);
                         mail.setText(user.getMail());
                         lastname.setText(user.secName);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void setName(TextView name) {
+        personRepository.getMyRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    User user = ds.getValue(User.class);
+                    if (user.mail.equals(Objects.requireNonNull(personRepository.getmAuth().getCurrentUser()).getEmail())) {
+                        name.setText(user.name);
                     }
                 }
             }

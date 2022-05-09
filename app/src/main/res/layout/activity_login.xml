@@ -159,6 +159,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/other_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -176,6 +177,7 @@
         />
 
     <com.google.android.material.button.MaterialButton
+        android:visibility="gone"
         android:id="@+id/vk_button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="180dp"
@@ -191,6 +193,7 @@
         app:cornerRadius="30dp"/>
 
     <com.google.android.material.button.MaterialButton
+        android:visibility="gone"
         android:id="@+id/google_button"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="180dp"

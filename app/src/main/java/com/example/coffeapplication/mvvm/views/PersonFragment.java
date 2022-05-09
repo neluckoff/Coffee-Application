@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,17 +26,28 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.coffeapplication.MainActivity;
 import com.example.coffeapplication.R;
+import com.example.coffeapplication.mvvm.models.User;
+import com.example.coffeapplication.mvvm.repositories.PersonRepository;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
 import com.example.coffeapplication.mvvm.viewModels.PersonViewModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 public class PersonFragment extends Fragment {
     Button loyaltyProgram, exit, historyOrders;
-    Dialog loyaltyDialog, ordersDialog, editDialog;
+    Dialog loyaltyDialog, ordersDialog, editDialog, editInfoDialog;
     ImageView qrcode;
     AuthViewModel viewModel;
     PersonViewModel personViewModel;
@@ -54,10 +66,6 @@ public class PersonFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_person, container, false);
         personViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
-
-        name = view.findViewById(R.id.pName);
-        mail = view.findViewById(R.id.tNumber);
-        personViewModel.getNameAndMailFromBD(name, mail);
 
         String data = "Mama krasotul\'ka";
         qrcode = view.findViewById(R.id.QRcode);
@@ -113,9 +121,6 @@ public class PersonFragment extends Fragment {
 
         editProfile = view.findViewById(R.id.editProfile);
         editDialog = new Dialog(getContext());
-//        TextView name = view.findViewById(R.id.editName);
-//        TextView lastname = view.findViewById(R.id.editLastname);
-//        TextView mail = view.findViewById(R.id.editMail);
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +135,50 @@ public class PersonFragment extends Fragment {
                 (editDialog.findViewById(R.id.closeEdit)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        EditText nameText = (editDialog.findViewById(R.id.editName));
+                        EditText firstnameText = (editDialog.findViewById(R.id.editLastname));
+                        EditText mailText = (editDialog.findViewById(R.id.editMail));
+                        String name = nameText.getText().toString();
+                        String firstname = firstnameText.getText().toString();
+                        String mail = mailText.getText().toString();
+
+                        //DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Users");
+                        PersonRepository personRepository = new PersonRepository();
+
+                        if (!name.isEmpty() && !firstname.isEmpty() && !mail.isEmpty()) {
+                            personRepository.getMyRef().addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    Map<String, Object> map = new HashMap<>();
+                                    map.clear();
+                                    String id ="";
+                                    boolean result = false;
+                                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                                        User user = ds.getValue(User.class);
+                                        if (user.mail.equals(Objects.requireNonNull(personRepository.getmAuth().getCurrentUser()).getEmail())) {
+                                            id = ds.getKey();
+                                            if (name == user.mail && firstname == user.secName && mail == user.mail) {
+                                                result = true;
+                                            }
+                                        }
+                                    }
+                                    if (!result) {
+                                        map.put("name", name);
+                                        map.put("secName", firstname);
+                                        personRepository.getMyRef().child(id).updateChildren(map);
+                                        TextView name2 = view.findViewById(R.id.pName);
+                                        TextView mail2 = view.findViewById(R.id.tNumber);
+                                        personViewModel.getNameAndMailFromBD(name2, mail2);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                        //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new PersonFragment()).commit();
                         editDialog.dismiss();
                     }
                 });
@@ -137,6 +186,10 @@ public class PersonFragment extends Fragment {
                 editDialog.show();
             }
         });
+
+        name = view.findViewById(R.id.pName);
+        mail = view.findViewById(R.id.tNumber);
+        personViewModel.getNameAndMailFromBD(name, mail);
     }
 
 }

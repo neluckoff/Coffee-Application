@@ -15,6 +15,9 @@ public class MenuItem {
         this.season = season;
     }
 
+    public MenuItem() {
+    }
+
     public String getName() {
         return name;
     }

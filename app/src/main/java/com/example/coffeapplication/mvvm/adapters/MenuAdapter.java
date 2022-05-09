@@ -1,12 +1,20 @@
 package com.example.coffeapplication.mvvm.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -92,11 +100,41 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
             public void onClick(View view) {
                 holder.st_menu.setVisibility(View.GONE);
                 holder.ad_menu.setVisibility(View.VISIBLE);
-                String text = data.get(position).getName();
-                String cost = data.get(position).getCost();
-                mDataBase = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Cart");
-                Cart cart = new Cart(text, "Без сиропа", cost, "1");
-                mDataBase.push().setValue(cart);
+
+                String name = data.get(position).getName();
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Cart");
+                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        boolean result = false;
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Cart cart = ds.getValue(Cart.class);
+                            String id = ds.getKey();
+
+                            if (name.equals(cart.getName())) {
+                                String count = String.valueOf(Integer.parseInt(cart.getCount()) + 1);
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("count", count);
+                                rootRef.child(id).updateChildren(map);
+                                holder.counter.setText(count);
+                                result = true;
+                            }
+                        }
+                        if (!result) {
+                            String text = data.get(position).getName();
+                            String cost = data.get(position).getCost();
+                            mDataBase = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Cart");
+                            Cart cart2 = new Cart(text, "Без сиропа", cost, "1");
+                            mDataBase.push().setValue(cart2);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
@@ -166,6 +204,182 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                     }
                 });
+            }
+        });
+
+        Dialog dialog = new Dialog(context);
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dialog.setContentView(R.layout.item_menu_info);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+                ((TextView)dialog.findViewById(R.id.textView2)).setText(holder.text.getText().toString());
+                ((ImageView)dialog.findViewById(R.id.imageView4)).setImageResource(data.get(position).getImage());
+                ((TextView)dialog.findViewById(R.id.realCost)).setText(holder.cost.getText().toString());
+
+                if (data.get(position).getId() == "bake" || data.get(position).getId() == "season-bake") {
+                    ((TextView)dialog.findViewById(R.id.textView4)).setVisibility(View.GONE);
+                    ((Spinner)dialog.findViewById(R.id.spinner)).setVisibility(View.GONE);
+                } else {
+                    ((TextView)dialog.findViewById(R.id.textView4)).setVisibility(View.VISIBLE);
+                    ((Spinner)dialog.findViewById(R.id.spinner)).setVisibility(View.VISIBLE);
+                }
+
+
+                DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Favorite");
+                rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String name = data.get(position).getName();
+                        for(DataSnapshot ds : snapshot.getChildren()) {
+                            MenuItem menuItem = ds.getValue(MenuItem.class);
+                            if (menuItem.getName().equals(name)) {
+                                (dialog.findViewById(R.id.button2)).setVisibility(View.GONE);
+                                (dialog.findViewById(R.id.button2del)).setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                (dialog.findViewById(R.id.buttonMoreMenu)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                (dialog.findViewById(R.id.button3)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String name = data.get(position).getName();
+                        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Cart");
+                        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot ds : snapshot.getChildren()) {
+                                    Cart cart = ds.getValue(Cart.class);
+                                    String id = ds.getKey();
+
+                                    if (name.equals(cart.getName())) {
+                                        (dialog.findViewById(R.id.button3)).setVisibility(View.GONE);
+                                        (dialog.findViewById(R.id.button3del)).setVisibility(View.VISIBLE);
+                                        String count = String.valueOf(Integer.parseInt(cart.getCount()) + 1);
+                                        Map<String, Object> map = new HashMap<>();
+                                        map.put("count", count);
+                                        rootRef.child(id).updateChildren(map);
+                                        Toast.makeText(context.getApplicationContext(), "Теперь в корзине " + count + " элемента", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        (dialog.findViewById(R.id.button3)).setVisibility(View.GONE);
+                                        (dialog.findViewById(R.id.button3del)).setVisibility(View.VISIBLE);
+                                        mDataBase = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Cart");
+                                        Cart cart2 = new Cart(((TextView)dialog.findViewById(R.id.textView2)).getText().toString(),
+                                                ((Spinner)dialog.findViewById(R.id.spinner)).getSelectedItem().toString(),
+                                                ((TextView)dialog.findViewById(R.id.realCost)).getText().toString(), "1");
+                                        mDataBase.push().setValue(cart2);
+                                        Toast.makeText(context.getApplicationContext(), "Элемент добавлен в корзину", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
+
+                (dialog.findViewById(R.id.button3del)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String name = data.get(position).getName();
+                        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Cart");
+                        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot ds : snapshot.getChildren()) {
+                                    Cart cart = ds.getValue(Cart.class);
+                                    String id = ds.getKey();
+
+                                    if (name.equals(cart.getName())) {
+                                        if (Integer.parseInt(cart.getCount()) > 1) {
+                                            String count = String.valueOf(Integer.parseInt(cart.getCount()) - 1);
+                                            Map<String, Object> map = new HashMap<>();
+                                            map.put("count", count);
+                                            rootRef.child(id).updateChildren(map);
+                                            holder.counter.setText(count);
+                                            (dialog.findViewById(R.id.button3)).setVisibility(View.VISIBLE);
+                                            (dialog.findViewById(R.id.button3del)).setVisibility(View.GONE);
+                                            Toast.makeText(context.getApplicationContext(), "Теперь в корзине " + count + " элемента", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            (dialog.findViewById(R.id.button3)).setVisibility(View.VISIBLE);
+                                            (dialog.findViewById(R.id.button3del)).setVisibility(View.GONE);
+                                            rootRef.child(id).removeValue();
+                                            Toast.makeText(context.getApplicationContext(), "Элемент убран из корзины", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
+
+                (dialog.findViewById(R.id.button2)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ((Button)dialog.findViewById(R.id.button2del)).setVisibility(View.VISIBLE);
+                        ((Button)dialog.findViewById(R.id.button2)).setVisibility(View.GONE);
+                        mDataBase = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Favorite");
+                        MenuItem menuItem = new MenuItem(data.get(position).getName(), data.get(position).getCost(), data.get(position).getId(),
+                                data.get(position).getImage(), data.get(position).isSeason());
+                        mDataBase.push().setValue(menuItem);
+                        Toast.makeText(context.getApplicationContext(), "Добавлено", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                (dialog.findViewById(R.id.button2del)).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Favorite");
+                        rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String name = data.get(position).getName();
+                                for(DataSnapshot ds : snapshot.getChildren()) {
+                                    MenuItem menuItem = ds.getValue(MenuItem.class);
+                                    String id = ds.getKey();
+                                    if (menuItem.getName().equals(name)) {
+                                        (dialog.findViewById(R.id.button2)).setVisibility(View.VISIBLE);
+                                        (dialog.findViewById(R.id.button2del)).setVisibility(View.GONE);
+                                        rootRef.child(id).removeValue();
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+                });
+
+                dialog.show();
             }
         });
     }
