@@ -14,10 +14,11 @@ public class MenuBakeViewModel extends ViewModel {
     private MutableLiveData<ArrayList<MenuItem>> currentName;
 
     public MutableLiveData<ArrayList<MenuItem>> getCurrentName() {
+        MenusRepository menusRepository = new MenusRepository();
         if (currentName == null) {
             currentName = new MutableLiveData<ArrayList<MenuItem>>();
         }
-        currentName.setValue(new MenusRepository().getBakeHolder());
+        currentName.setValue(menusRepository.getBakeHolder());
         return currentName;
     }
 

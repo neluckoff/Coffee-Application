@@ -4,9 +4,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeapplication.R;
-import com.example.coffeapplication.mvvm.models.Cart;
+import com.example.coffeapplication.mvvm.models.MenuItem;
+import com.example.coffeapplication.mvvm.views.MenuFavoriteFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,36 +17,30 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CartRepository {
-    ArrayList<Cart> holder;
-    int result;
+public class MenuFavoriteRepository {
+    ArrayList<MenuItem> holder;
 
-    public CartRepository() {
+    public MenuFavoriteRepository() {
         holder = new ArrayList<>();
     }
 
-    public ArrayList<Cart> getHolder() {
-        return holder;
-    }
-
-    public ArrayList<Cart> getFromDB(View view) {
+    public ArrayList<MenuItem> getFavoriteFromDB(View view) {
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = mFirebaseDatabase.getReference("Cart");
+        DatabaseReference myRef = mFirebaseDatabase.getReference("Favorite");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int sum = 0;
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    Cart cart = ds.getValue(Cart.class);
-                    holder.add(cart);
-
-                    String a = (cart.getCost()
-                            .substring(0, cart.getCost().length()-1));
-                    sum += (Integer.parseInt(a) * Integer.parseInt(cart.getCount()));
+                    MenuItem menuItem = ds.getValue(MenuItem.class);
+                    holder.add(menuItem);
+                    sum+=1;
                 }
-                TextView sumText = view.findViewById(R.id.resultSum);
-                sumText.setText(sum + "p");
+                TextView textView = view.findViewById(R.id.favoriteCounter);
+                textView.setText(String.valueOf(sum));
+                RecyclerView rcv = view.findViewById(R.id.favoriteRecycler);
+                rcv.getAdapter().notifyItemChanged(holder.size() - 1);
             }
 
             @Override
@@ -52,6 +48,7 @@ public class CartRepository {
 
             }
         });
+        System.out.println(holder);
         return holder;
     }
 }

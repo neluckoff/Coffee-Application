@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class OrderRepository {
     ArrayList<Orders> holder;
-    int result;
 
     public OrderRepository() {
         holder = new ArrayList<>();
@@ -34,9 +33,7 @@ public class OrderRepository {
                 int count = 0;
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Orders orders = ds.getValue(Orders.class);
-                    System.out.println(orders);
                     holder.add(orders);
-                    System.out.println(orders.getNames());
                     count += 1;
                 }
                 TextView sumText = view.findViewById(R.id.counterHistory);

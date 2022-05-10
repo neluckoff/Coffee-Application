@@ -1,5 +1,7 @@
 package com.example.coffeapplication.mvvm.viewModels;
 
+import android.view.View;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,12 +12,17 @@ import java.util.ArrayList;
 
 public class MenuStandartViewModel extends ViewModel {
     private MutableLiveData<ArrayList<MenuItem>> currentName;
+    MenusRepository menusRepository = new MenusRepository();
 
     public MutableLiveData<ArrayList<MenuItem>> getCurrentName() {
         if (currentName == null) {
             currentName = new MutableLiveData<ArrayList<MenuItem>>();
         }
-        currentName.setValue(new MenusRepository().getStandartHolder());
+        currentName.setValue(menusRepository.getStandartHolder());
         return currentName;
+    }
+
+    public ArrayList<MenuItem> getHolder() {
+        return menusRepository.getStandartHolder();
     }
 }

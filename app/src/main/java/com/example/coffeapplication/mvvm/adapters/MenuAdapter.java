@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.models.Cart;
 import com.example.coffeapplication.mvvm.models.MenuItem;
+import com.example.coffeapplication.mvvm.repositories.MenusRepository;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -343,6 +344,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                     public void onClick(View view) {
                         ((Button)dialog.findViewById(R.id.button2del)).setVisibility(View.VISIBLE);
                         ((Button)dialog.findViewById(R.id.button2)).setVisibility(View.GONE);
+                        data.get(position).setFavorite(true);
                         mDataBase = FirebaseDatabase.getInstance("https://coffe-application-default-rtdb.firebaseio.com/").getReference("Favorite");
                         MenuItem menuItem = new MenuItem(data.get(position).getName(), data.get(position).getCost(), data.get(position).getId(),
                                 data.get(position).getImage(), data.get(position).isSeason());

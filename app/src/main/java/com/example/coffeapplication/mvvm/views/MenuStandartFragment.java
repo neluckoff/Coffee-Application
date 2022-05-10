@@ -2,6 +2,7 @@ package com.example.coffeapplication.mvvm.views;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -44,7 +45,13 @@ public class MenuStandartFragment extends Fragment {
         menuViewModel.getCurrentName().observe(getViewLifecycleOwner(), nameObserver);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         rcv.setLayoutManager(gridLayoutManager);
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //rcv.getAdapter().notifyItemChanged(menuViewModel.getHolder().size()-1);
+
     }
 }

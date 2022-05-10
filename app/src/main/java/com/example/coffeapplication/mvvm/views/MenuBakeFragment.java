@@ -2,7 +2,6 @@ package com.example.coffeapplication.mvvm.views;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -13,18 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.MenuAdapter;
-import com.example.coffeapplication.mvvm.adapters.NewsAdapter;
 import com.example.coffeapplication.mvvm.models.MenuItem;
-import com.example.coffeapplication.mvvm.models.News;
 import com.example.coffeapplication.mvvm.viewModels.MenuBakeViewModel;
-import com.example.coffeapplication.mvvm.viewModels.MenuViewModel;
-import com.example.coffeapplication.mvvm.viewModels.NewsViewModel;
 
 import java.util.ArrayList;
 

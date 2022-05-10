@@ -12,10 +12,11 @@ public class MenuSeasonViewModel extends ViewModel {
     private MutableLiveData<ArrayList<MenuItem>> currentName;
 
     public MutableLiveData<ArrayList<MenuItem>> getCurrentName() {
+        MenusRepository menusRepository = new MenusRepository();
         if (currentName == null) {
             currentName = new MutableLiveData<ArrayList<MenuItem>>();
         }
-        currentName.setValue(new MenusRepository().getSeasonHolder());
+        currentName.setValue(menusRepository.getSeasonHolder());
         return currentName;
     }
 }

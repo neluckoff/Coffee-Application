@@ -31,7 +31,6 @@ public class CartViewModel extends ViewModel {
             currentName = new MutableLiveData<ArrayList<Cart>>();
         }
         currentName.setValue(cartRepository.getFromDB(view));
-        System.out.println(cartRepository.getSum());
         return currentName;
     }
 }

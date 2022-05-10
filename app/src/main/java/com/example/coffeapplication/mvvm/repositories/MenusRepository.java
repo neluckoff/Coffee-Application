@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.models.Cart;
@@ -24,22 +25,13 @@ public class MenusRepository {
     ArrayList<MenuItem> standartHolder = new ArrayList<>();
     ArrayList<MenuItem> seasonHolder = new ArrayList<>();
     ArrayList<MenuItem> bakeHolder = new ArrayList<>();
-    ArrayList<MenuItem> favoriteHolder;
 
     public MenusRepository() {
         holder = new ArrayList<>();
         standartHolder = new ArrayList<>();
         seasonHolder = new ArrayList<>();
         bakeHolder = new ArrayList<>();
-        favoriteHolder = new ArrayList<>();
         createMenu();
-
-        favoriteHolder.clear();
-        favoriteHolder.addAll(getFavoriteFromDB());
-        if (favoriteHolder.isEmpty()) {
-            favoriteHolder.addAll(getFavoriteHolder());
-        }
-        System.out.println(favoriteHolder);
 
         MenuItem item;
         for (int i=0; i < holder.size(); i++) {
@@ -83,33 +75,5 @@ public class MenusRepository {
 
     public ArrayList<MenuItem> getHolder() {
         return holder;
-    }
-
-    public ArrayList<MenuItem> getFavoriteHolder() {
-        return favoriteHolder;
-    }
-
-    public ArrayList<MenuItem> getFavoriteFromDB() {
-        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = mFirebaseDatabase.getReference("Favorite");
-        ArrayList<MenuItem> result = new ArrayList<>();
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    MenuItem cart = ds.getValue(MenuItem.class);
-                    result.add(new MenuItem(cart.getName(), cart.getCost(), cart.getId(), cart.getImage(), cart.isSeason()));
-                    System.out.println(cart.getName());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return result;
     }
 }

@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.MenuAdapter;
 import com.example.coffeapplication.mvvm.models.MenuItem;
-import com.example.coffeapplication.mvvm.viewModels.MenuBakeViewModel;
 import com.example.coffeapplication.mvvm.viewModels.MenuSeasonViewModel;
 
 import java.util.ArrayList;
