@@ -28,7 +28,7 @@ import com.example.coffeapplication.mvvm.viewModels.OrderViewModel;
 import java.util.ArrayList;
 
 public class MenuFavoriteFragment extends Fragment {
-    MenuFavAdapter adapter;
+    MenuAdapter adapter;
     MenuFavoriteViewModel menuViewModel;
     RecyclerView rcv;
 
@@ -41,14 +41,14 @@ public class MenuFavoriteFragment extends Fragment {
         final Observer<ArrayList<MenuItem>> nameObserver = new Observer<ArrayList<MenuItem>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<MenuItem> order) {
-                adapter = new MenuFavAdapter(order,requireContext());
+                adapter = new MenuAdapter(order,requireContext());
                 rcv.setAdapter(adapter);
             }
         };
         rcv = view.findViewById(R.id.favoriteRecycler);
 
         menuViewModel.getCurrentName(view).observe(getViewLifecycleOwner(), nameObserver);
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),1);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         rcv.setLayoutManager(gridLayoutManager);
 
         return view;
@@ -57,13 +57,5 @@ public class MenuFavoriteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Button btn = view.findViewById(R.id.favClose);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new MenuFragment()).commit();
-            }
-        });
     }
 }

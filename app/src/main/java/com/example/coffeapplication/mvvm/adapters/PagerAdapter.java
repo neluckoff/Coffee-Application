@@ -37,8 +37,8 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return menuStandartFragment;
             case 2:
                 return menuBakeFragment;
-//            case 3:
-//                return menuFavoriteFragment;
+            case 3:
+                return menuFavoriteFragment;
             default:
                 return null;
         }

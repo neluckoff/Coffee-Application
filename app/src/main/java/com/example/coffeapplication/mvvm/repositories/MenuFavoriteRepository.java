@@ -37,8 +37,6 @@ public class MenuFavoriteRepository {
                     holder.add(menuItem);
                     sum+=1;
                 }
-                TextView textView = view.findViewById(R.id.favoriteCounter);
-                textView.setText(String.valueOf(sum));
                 RecyclerView rcv = view.findViewById(R.id.favoriteRecycler);
                 rcv.getAdapter().notifyItemChanged(holder.size() - 1);
             }
