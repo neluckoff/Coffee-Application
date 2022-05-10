@@ -13,17 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.adapters.MenuAdapter;
-import com.example.coffeapplication.mvvm.adapters.MenuFavAdapter;
-import com.example.coffeapplication.mvvm.adapters.OrderAdapter;
 import com.example.coffeapplication.mvvm.models.MenuItem;
-import com.example.coffeapplication.mvvm.models.Orders;
-import com.example.coffeapplication.mvvm.viewModels.MenuBakeViewModel;
 import com.example.coffeapplication.mvvm.viewModels.MenuFavoriteViewModel;
-import com.example.coffeapplication.mvvm.viewModels.OrderViewModel;
 
 import java.util.ArrayList;
 
