@@ -23,6 +23,10 @@ public class PersonRepository {
         return user;
     }
 
+    public DatabaseReference getmFirebaseDatabase() {
+        return mFirebaseDatabase.getReference();
+    }
+
     public DatabaseReference getMyRef() {
         return myRef;
     }

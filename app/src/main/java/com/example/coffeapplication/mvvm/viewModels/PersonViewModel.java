@@ -70,7 +70,7 @@ public class PersonViewModel extends ViewModel {
                     User user = ds.getValue(User.class);
                     if (user.mail.equals(Objects.requireNonNull(personRepository.getmAuth().getCurrentUser()).getEmail())) {
                         name.setText(user.name);
-                        mail.setText(user.getMail());
+                        mail.setText(user.getBirthday());
                         lastname.setText(user.secName);
                     }
                 }

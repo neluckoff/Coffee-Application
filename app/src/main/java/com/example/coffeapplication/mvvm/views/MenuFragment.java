@@ -34,10 +34,6 @@ public class MenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
         cartFragment = new CartFragment();
         menuFavoriteFragment = new MenuFavoriteFragment();
-        if(savedInstanceState!=null){
-            Fragment fragment = getActivity().getSupportFragmentManager().getFragment(savedInstanceState,"fragmentInstanceSaved");
-            //recreate your preserved fragment here
-        }
     }
 
     @Nullable
@@ -48,9 +44,9 @@ public class MenuFragment extends Fragment {
         viewPager = view.findViewById(R.id.viewPager);
 
         PagerAdapter adapter = new PagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setOffscreenPageLimit(3);
+        viewPager.setOffscreenPageLimit(1);
         viewPager.setAdapter(adapter);
-        Objects.requireNonNull(viewPager.getAdapter()).notifyDataSetChanged();
+        viewPager.getAdapter().notifyDataSetChanged();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -69,7 +65,7 @@ public class MenuFragment extends Fragment {
 
             }
         });
-        viewPager.setVisibility(View.VISIBLE);
+        viewPager.getAdapter().notifyDataSetChanged();
         return view;
     }
 

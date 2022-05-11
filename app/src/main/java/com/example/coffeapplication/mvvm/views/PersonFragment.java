@@ -30,6 +30,7 @@ import com.example.coffeapplication.mvvm.models.User;
 import com.example.coffeapplication.mvvm.repositories.PersonRepository;
 import com.example.coffeapplication.mvvm.viewModels.AuthViewModel;
 import com.example.coffeapplication.mvvm.viewModels.PersonViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -143,32 +145,22 @@ public class PersonFragment extends Fragment {
                         String mail = mailText.getText().toString();
 
                         //DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Users");
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
                         PersonRepository personRepository = new PersonRepository();
 
                         if (!name.isEmpty() && !firstname.isEmpty() && !mail.isEmpty()) {
-                            personRepository.getMyRef().addValueEventListener(new ValueEventListener() {
+                            databaseReference.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    Map<String, Object> map = new HashMap<>();
-                                    map.clear();
-                                    String id ="";
-                                    boolean result = false;
                                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
                                         User user = ds.getValue(User.class);
                                         if (user.mail.equals(Objects.requireNonNull(personRepository.getmAuth().getCurrentUser()).getEmail())) {
-                                            id = ds.getKey();
-                                            if (name == user.mail && firstname == user.secName && mail == user.mail) {
-                                                result = true;
-                                            }
+                                            String id = ds.getKey();
+                                            databaseReference.child(id).child("name").setValue(name);
+                                            databaseReference.child(id).child("secName").setValue(firstname);
+                                            databaseReference.child(id).child("birthdat").setValue(mail);
+                                            return;
                                         }
-                                    }
-                                    if (!result) {
-                                        map.put("name", name);
-                                        map.put("secName", firstname);
-                                        personRepository.getMyRef().child(id).updateChildren(map);
-                                        TextView name2 = view.findViewById(R.id.pName);
-                                        TextView mail2 = view.findViewById(R.id.tNumber);
-                                        personViewModel.getNameAndMailFromBD(name2, mail2);
                                     }
                                 }
 
@@ -180,6 +172,7 @@ public class PersonFragment extends Fragment {
                         }
                         //getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, new PersonFragment()).commit();
                         editDialog.dismiss();
+                        editProfile.setVisibility(View.GONE);
                     }
                 });
 

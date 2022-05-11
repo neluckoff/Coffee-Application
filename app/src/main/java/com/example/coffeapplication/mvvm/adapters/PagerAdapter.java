@@ -33,7 +33,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return menuSeasonFragment.getChildFragmentManager();
+                return new MenuSeasonFragment();
             case 1:
                 return new MenuStandartFragment();
             case 2:
