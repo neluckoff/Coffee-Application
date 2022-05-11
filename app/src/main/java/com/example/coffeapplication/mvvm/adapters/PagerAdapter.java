@@ -13,16 +13,17 @@ import com.example.coffeapplication.mvvm.views.MenuStandartFragment;
 
 public class PagerAdapter extends FragmentPagerAdapter {
     private int numOfTabs;
-    private MenuFavoriteFragment menuFavoriteFragment;
+    //private MenuFavoriteFragment menuFavoriteFragment;
     private MenuStandartFragment menuStandartFragment;
     private  MenuSeasonFragment menuSeasonFragment;
     private MenuBakeFragment menuBakeFragment;
+    private MenuAdapter adapter;
 
     public PagerAdapter(@NonNull FragmentManager fm, int numOfTabs) {
         super(fm);
         this.numOfTabs = numOfTabs;
         menuBakeFragment = new MenuBakeFragment();
-        menuFavoriteFragment = new MenuFavoriteFragment();
+        //menuFavoriteFragment = new MenuFavoriteFragment();
         menuSeasonFragment = new MenuSeasonFragment();
         menuStandartFragment = new MenuStandartFragment();
     }
@@ -32,16 +33,21 @@ public class PagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return menuSeasonFragment;
+                return menuSeasonFragment.getChildFragmentManager();
             case 1:
-                return menuStandartFragment;
+                return new MenuStandartFragment();
             case 2:
-                return menuBakeFragment;
+                return new MenuBakeFragment();
             case 3:
-                return menuFavoriteFragment;
+                return new MenuFavoriteFragment();
             default:
                 return null;
         }
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        return super.getItemPosition(object);
     }
 
     @Override

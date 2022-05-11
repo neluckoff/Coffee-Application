@@ -31,11 +31,9 @@ public class MenuFavoriteRepository {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int sum = 0;
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     MenuItem menuItem = ds.getValue(MenuItem.class);
                     holder.add(menuItem);
-                    sum+=1;
                 }
                 RecyclerView rcv = view.findViewById(R.id.favoriteRecycler);
                 rcv.getAdapter().notifyItemChanged(holder.size() - 1);
@@ -46,7 +44,27 @@ public class MenuFavoriteRepository {
 
             }
         });
-        System.out.println(holder);
+        return holder;
+    }
+
+    public ArrayList<MenuItem> getHolder() {
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mFirebaseDatabase.getReference("Favorite");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    MenuItem menuItem = ds.getValue(MenuItem.class);
+                    holder.add(menuItem);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return holder;
     }
 }

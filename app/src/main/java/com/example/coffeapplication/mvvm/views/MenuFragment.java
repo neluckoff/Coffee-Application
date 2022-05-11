@@ -18,6 +18,8 @@ import com.example.coffeapplication.mvvm.viewModels.MenuViewModel;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 public class MenuFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -32,6 +34,10 @@ public class MenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
         cartFragment = new CartFragment();
         menuFavoriteFragment = new MenuFavoriteFragment();
+        if(savedInstanceState!=null){
+            Fragment fragment = getActivity().getSupportFragmentManager().getFragment(savedInstanceState,"fragmentInstanceSaved");
+            //recreate your preserved fragment here
+        }
     }
 
     @Nullable
@@ -41,14 +47,16 @@ public class MenuFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabLayout);
         viewPager = view.findViewById(R.id.viewPager);
 
-        PagerAdapter adapter = new PagerAdapter(getActivity().getSupportFragmentManager(),
-                tabLayout.getTabCount());
+        PagerAdapter adapter = new PagerAdapter(getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(adapter);
+        Objects.requireNonNull(viewPager.getAdapter()).notifyDataSetChanged();
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                viewPager.getAdapter().notifyDataSetChanged();
             }
 
             @Override
@@ -61,7 +69,7 @@ public class MenuFragment extends Fragment {
 
             }
         });
-
+        viewPager.setVisibility(View.VISIBLE);
         return view;
     }
 
@@ -71,7 +79,6 @@ public class MenuFragment extends Fragment {
         cartDialog = new Dialog(getContext());
 
         cartImage = view.findViewById(R.id.imageView3);
-        star = view.findViewById(R.id.imageViewStar);
 
         cartImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,12 +86,11 @@ public class MenuFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, cartFragment).commit();
             }
         });
+    }
 
-        star.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_news, menuFavoriteFragment).commit();
-            }
-        });
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getActivity().getSupportFragmentManager().putFragment(outState,"fragmentInstanceSaved",getActivity().getSupportFragmentManager().findFragmentById(R.id.tabLayout));
     }
 }

@@ -1,5 +1,6 @@
 package com.example.coffeapplication.mvvm.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coffeapplication.R;
 import com.example.coffeapplication.mvvm.models.Cart;
 import com.example.coffeapplication.mvvm.models.MenuItem;
+import com.example.coffeapplication.mvvm.repositories.MenuFavoriteRepository;
 import com.example.coffeapplication.mvvm.repositories.MenusRepository;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -57,6 +59,14 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         return new MenuViewHolder(view);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void update() {
+        ArrayList<MenuItem> new_data = new ArrayList<>();
+        new_data.addAll(data);
+        data.clear();
+        data.addAll(new_data);
+    }
+
     @Override
     public void onBindViewHolder(@NonNull final MenuViewHolder holder, int position) {
         final MenuItem temp = data.get(position);
@@ -65,6 +75,26 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
         holder.cost.setText(data.get(position).getCost());
         holder.img.setImageResource(data.get(position).getImage());
 
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference("Cart");
+        rootRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Cart cart = ds.getValue(Cart.class);
+                    for (int i=0; i < data.size(); i++) {
+                        if (data.get(position).getName() == cart.getName()) {
+                            holder.st_menu.setVisibility(View.GONE);
+                            holder.ad_menu.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -94,7 +124,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
     @Override
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position, @NonNull List<Object> payloads) {
         super.onBindViewHolder(holder, position, payloads);
-        ArrayList<Cart> cartArrayList = new ArrayList<>();
+
 
         holder.st_btn_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +165,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                     }
                 });
-
+                update();
             }
         });
 
@@ -173,7 +203,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                     }
                 });
-
+                update();
             }
         });
 
@@ -205,6 +235,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
 
                     }
                 });
+                update();
             }
         });
 
@@ -254,6 +285,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                 (dialog.findViewById(R.id.buttonMoreMenu)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        update();
                         dialog.dismiss();
                     }
                 });
@@ -349,6 +381,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                         MenuItem menuItem = new MenuItem(data.get(position).getName(), data.get(position).getCost(), data.get(position).getId(),
                                 data.get(position).getImage(), data.get(position).isSeason());
                         mDataBase.push().setValue(menuItem);
+                        update();
                         Toast.makeText(context.getApplicationContext(), "Добавлено", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -370,6 +403,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                                         rootRef.child(id).removeValue();
                                     }
                                 }
+                                update();
 
                             }
 

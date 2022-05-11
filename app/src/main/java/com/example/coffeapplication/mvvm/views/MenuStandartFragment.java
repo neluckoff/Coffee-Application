@@ -37,6 +37,7 @@ public class MenuStandartFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final ArrayList<MenuItem> menu) {
                 adapter = new MenuAdapter(menu, requireContext());
+                adapter.update();
                 rcv.setAdapter(adapter);
             }
         };

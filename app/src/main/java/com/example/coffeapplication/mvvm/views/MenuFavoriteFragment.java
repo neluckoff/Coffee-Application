@@ -36,6 +36,7 @@ public class MenuFavoriteFragment extends Fragment {
             @Override
             public void onChanged(@Nullable final ArrayList<MenuItem> order) {
                 adapter = new MenuAdapter(order,requireContext());
+                adapter.update();
                 rcv.setAdapter(adapter);
             }
         };
