@@ -72,7 +72,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cartDialog = new Dialog(getContext());
 
         cartImage = view.findViewById(R.id.imageView3);
 
@@ -84,9 +83,5 @@ public class MenuFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        getActivity().getSupportFragmentManager().putFragment(outState,"fragmentInstanceSaved",getActivity().getSupportFragmentManager().findFragmentById(R.id.tabLayout));
-    }
+
 }

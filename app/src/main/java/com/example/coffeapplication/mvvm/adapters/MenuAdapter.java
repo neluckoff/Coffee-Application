@@ -273,7 +273,6 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                                 (dialog.findViewById(R.id.button2del)).setVisibility(View.VISIBLE);
                             }
                         }
-
                     }
 
                     @Override
@@ -298,10 +297,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuViewHolder
                         rootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot ds : snapshot.getChildren()) {
+                                for (DataSnapshot ds : snapshot.getChildren()) {
                                     Cart cart = ds.getValue(Cart.class);
                                     String id = ds.getKey();
-
                                     if (name.equals(cart.getName())) {
                                         (dialog.findViewById(R.id.button3)).setVisibility(View.GONE);
                                         (dialog.findViewById(R.id.button3del)).setVisibility(View.VISIBLE);

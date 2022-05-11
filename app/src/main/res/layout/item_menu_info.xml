@@ -26,6 +26,7 @@
 
 
             <Button
+                android:visibility="visible"
                 android:id="@+id/button3"
                 android:layout_width="145dp"
                 android:layout_height="55dp"
